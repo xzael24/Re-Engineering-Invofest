@@ -6,15 +6,12 @@ export default function Footer() {
     <footer className="w-full bg-[#fae8f0] pt-16 pb-6 px-6 lg:px-12 relative z-10 border-t border-pink-100">
       <div className="max-w-7xl mx-auto">
         
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 mb-16">
           
-          {/* Column 1: Logo */}
           <div className="flex flex-col items-start pr-0 lg:pr-8">
             <img src={navLogo} alt="Invofest Logo" className="w-[180px] md:w-[200px] object-contain mb-6 drop-shadow-sm" />
           </div>
 
-          {/* Column 2: Menu Navigasi */}
           <div className="flex flex-col">
             <h3 className="text-slate-800 font-bold mb-6 text-[15px] uppercase tracking-wider">Menu Navigasi</h3>
             <ul className="space-y-4">
@@ -51,7 +48,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Ikuti Kami */}
           <div className="flex flex-col">
             <h3 className="text-slate-800 font-bold mb-6 text-[15px] uppercase tracking-wider">Ikuti Kami</h3>
             <ul className="space-y-4">
@@ -77,7 +73,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Alamat */}
           <div className="flex flex-col">
             <h3 className="text-slate-800 font-bold mb-6 text-[15px] uppercase tracking-wider">Alamat</h3>
             <div className="w-full h-[180px] rounded-lg overflow-hidden border-2 border-pink-100 shadow-sm transition-transform duration-300 hover:scale-[1.02]">
@@ -96,7 +91,6 @@ export default function Footer() {
 
         </div>
 
-        {/* Copyright Bottom */}
         <div className="pt-6 border-t border-pink-200/60 mt-4 flex justify-between items-center flex-wrap gap-4">
           <p className="text-slate-500 text-[14.5px]">
             © 2025 INVOFEST. All Rights Reserved.

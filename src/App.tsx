@@ -20,7 +20,6 @@ function App() {
       <Header />
       
       <main className="flex-grow w-full max-w-7xl mx-auto px-6 lg:px-12 pt-10 lg:pt-16 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        {/* Left Content */}
         <div className="z-10 relative flex flex-col justify-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
           <img 
             src={textImage} 
@@ -39,10 +38,8 @@ function App() {
           </div>
         </div>
 
-        {/* Right Mascot */}
         <div className="relative z-10 flex justify-center lg:justify-end animate-in fade-in slide-in-from-right-12 duration-1000 delay-300 fill-mode-both">
           <div className="relative group perspective-1000">
-            {/* Glow effect matching mascot theme */}
             <div className="absolute inset-0 bg-fuchsia-400/20 rounded-full blur-[80px] scale-125 -z-10 group-hover:bg-fuchsia-400/30 transition-colors duration-700" />
             <img 
               src={maskotHero} 
@@ -53,37 +50,26 @@ function App() {
         </div>
       </main>
 
-      {/* Pembicara Section */}
       <PembicaraSection />
 
-      {/* Tentang Section */}
       <TentangSection />
 
-      {/* Seminar Section */}
       <SeminarSection />
 
-      {/* Talkshow Section */}
       <TalkshowSection />
 
-      {/* Workshop Section */}
       <WorkshopSection />
 
-      {/* Competition Section */}
       <CompetitionSection />
 
-      {/* FAQ Section */}
       <FaqSection />
 
-      {/* Sponsor Section */}
       <SponsorSection />
 
-      {/* Media Partner Section */}
       <MediaSection />
 
-      {/* Footer Section */}
       <Footer />
 
-      {/* Floating Action Button (Up Arrow) */}
       <ButtonScroll />
     </div>
   )

@@ -11,10 +11,8 @@ export default function Collapse({ title, children }: CollapseProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-[0_0_15px_rgba(236,72,153,0.15)] border border-pink-100 relative overflow-hidden transition-all duration-300">
-      {/* Thick right border line */}
       <div className="absolute right-0 top-0 bottom-0 w-2 bg-[#8b2551]"></div>
       
-      {/* Button Header */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center p-5 lg:p-6 text-left focus:outline-none"
@@ -29,7 +27,6 @@ export default function Collapse({ title, children }: CollapseProps) {
         <span className="text-slate-700 font-semibold text-[15px] pr-4 leading-snug">{title}</span>
       </button>
       
-      {/* Expandable Content */}
       <div 
         className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100 mb-5' : 'max-h-0 opacity-0'}`}
       >

@@ -19,20 +19,16 @@ export default function SponsorSection() {
     <section className="w-full bg-white py-16 lg:py-28 px-6 lg:px-12 relative z-10">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header */}
         <div className="text-center mb-16 lg:mb-24">
           <h2 className="text-[36px] md:text-[45px] font-bold text-[#475569] tracking-tight">
             Sponsor <span className="text-[#8b2551]">INVOFEST 2025</span>
           </h2>
         </div>
 
-        {/* Sponsors Marquee */}
         <div className="relative w-full overflow-hidden flex group">
-          {/* Gradient fade masks for smoother entrance/exit (opsional opsional) */}
           <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
-          {/* Track 1 */}
           <div className="flex shrink-0 items-center animate-marquee group-hover:[animation-play-state:paused] gap-16 md:gap-24 lg:gap-32 pr-16 md:pr-24 lg:pr-32">
             {sponsors.map((sponsor, index) => (
               <div 
@@ -49,7 +45,6 @@ export default function SponsorSection() {
             ))}
           </div>
 
-          {/* Track 2 */}
           <div className="flex shrink-0 items-center animate-marquee group-hover:[animation-play-state:paused] gap-16 md:gap-24 lg:gap-32 pr-16 md:pr-24 lg:pr-32" aria-hidden="true">
             {sponsors.map((sponsor, index) => (
               <div 

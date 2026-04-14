@@ -11,16 +11,12 @@ export default function CardPembicara({ name, role, src, isVideo }: CardPembicar
   return (
     <div className="relative w-full max-w-[340px] bg-white border-[3px] border-[#8b2551] rounded-xl pt-[130px] pb-8 px-6 text-center mt-32 shadow-xl">
       
-      {/* Absolute Circle Mask - Centered exactly on the top border */}
       <div className="absolute left-1/2 -top-[112px] transform -translate-x-1/2 w-[224px] h-[224px] bg-white rounded-full flex items-center justify-center">
         
-        {/* Inner Circle Border */}
         <div className="w-[200px] h-[200px] rounded-full border-[4px] border-[#8b2551] overflow-hidden relative shadow-inner">
           
-          {/* Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#8b2551] from-10% to-pink-400"></div>
           
-          {/* Media Content */}
           {isVideo ? (
             <video 
               src={src} 

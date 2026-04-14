@@ -39,20 +39,16 @@ export default function MediaSection() {
     <section className="w-full bg-white py-12 lg:py-20 px-6 lg:px-12 relative z-10 border-t border-pink-50">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header */}
         <div className="text-center mb-16 lg:mb-20">
           <h2 className="text-[36px] md:text-[45px] font-bold text-[#475569] tracking-tight">
             Media Partner <span className="text-[#8b2551]">INVOFEST 2025</span>
           </h2>
         </div>
 
-        {/* Media Marquee */}
         <div className="relative w-full overflow-hidden flex group">
-          {/* Gradient fade masks for smoother entrance/exit */}
           <div className="absolute top-0 left-0 w-24 md:w-32 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute top-0 right-0 w-24 md:w-32 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
-          {/* Track 1 - Lengthen anim duration to 60s for readability of 16 items */}
           <div 
             className="flex shrink-0 items-center animate-marquee group-hover:[animation-play-state:paused] gap-12 md:gap-20 lg:gap-28 pr-12 md:pr-20 lg:pr-28"
             style={{ animationDuration: '60s' }}
@@ -72,7 +68,6 @@ export default function MediaSection() {
             ))}
           </div>
 
-          {/* Track 2 */}
           <div 
             className="flex shrink-0 items-center animate-marquee group-hover:[animation-play-state:paused] gap-12 md:gap-20 lg:gap-28 pr-12 md:pr-20 lg:pr-28" 
             aria-hidden="true"

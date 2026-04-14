@@ -32,7 +32,6 @@ export default function FaqSection() {
     <section className="w-full bg-white py-16 lg:py-24 px-6 lg:px-12 relative z-10">
       <div className="max-w-6xl mx-auto">
         
-        {/* Header */}
         <div className="text-center mb-16">
           <p className="text-slate-600 font-bold mb-4 text-[15px]">FAQ</p>
           <h2 className="text-[32px] md:text-[40px] font-bold text-slate-700 mb-6 leading-tight">
@@ -44,7 +43,6 @@ export default function FaqSection() {
           </p>
         </div>
 
-        {/* FAQ Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
           {faqs.map((faq, index) => (
             <Collapse key={index} title={faq.q}>
