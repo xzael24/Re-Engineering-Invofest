@@ -1,6 +1,4 @@
-import card1 from '../assets/card1.png';
-import card2 from '../assets/card2.mp4';
-import card3 from '../assets/card3.jpeg';
+
 import CardPembicara from './ui/CardPembicara';
 
 export default function PembicaraSection() {
@@ -21,20 +19,19 @@ export default function PembicaraSection() {
             <CardPembicara 
               name="Muhammad" 
               role="Bantu Mamah" 
-              src={card1}
+              src="https://i.pravatar.cc/400?img=11"
             />
 
             <CardPembicara 
               name="Zaim" 
               role="Tidak Mendekati Gebetan Teman" 
-              src={card2} 
-              isVideo={true}
+              src="https://i.pravatar.cc/400?img=68"
             />
 
             <CardPembicara 
               name="El Yafi" 
               role="Aldis Burger Rasanya Juicy Luicy" 
-              src={card3}
+              src="https://i.pravatar.cc/400?img=59"
             />
 
           </div>
