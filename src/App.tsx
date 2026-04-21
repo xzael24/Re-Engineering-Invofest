@@ -13,8 +13,16 @@ import FaqSection from './components/FaqSection';
 import SponsorSection from './components/SponsorSection';
 import MediaSection from './components/MediaSection';
 import Footer from './components/Footer';
+import RegisterSection from './components/RegisterSection';
 
 function App() {
+  const handleDaftarEvent = () => {
+    const registerSection = document.getElementById('registrasi');
+    if (registerSection) {
+      registerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800 relative overflow-hidden flex flex-col selection:bg-pink-200">
       <Header />
@@ -33,7 +41,9 @@ function App() {
             Intelligence: Innovate for a Smarter Tomorrow "</strong>.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Button>INFO SELENGKAPNYA</Button>
+            <Button onClick={handleDaftarEvent}>
+              DAFTAR EVENT SEKARANG (Pa Jamal tugas ke-3 disini btw)
+            </Button>
             <Button variant="outline">HUBUNGI PANITIA</Button>
           </div>
         </div>
@@ -67,6 +77,8 @@ function App() {
       <SponsorSection />
 
       <MediaSection />
+
+      <RegisterSection />
 
       <Footer />
 
