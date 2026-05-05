@@ -5,6 +5,8 @@ interface BaseInputProps {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rules?: any;
   error?: string;
   type?: string;
   placeholder?: string;
@@ -14,6 +16,7 @@ export const Input: React.FC<BaseInputProps> = ({
   label,
   name,
   register,
+  rules,
   error,
   type = "text",
   placeholder,
@@ -24,7 +27,7 @@ export const Input: React.FC<BaseInputProps> = ({
       <input
         type={type}
         placeholder={placeholder}
-        {...register(name)}
+        {...register(name, rules)}
         className={`border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow ${
           error ? "border-red-500 ring-red-500" : "border-gray-300"
         }`}

@@ -5,16 +5,25 @@ import { Textarea } from "../atoms/Textarea";
 import { Select } from "../atoms/Select";
 import { Button } from "../atoms/Button";
 
+type RegisterFormValues = {
+  name: string;
+  email: string;
+  password: string;
+  bio: string;
+  event: string;
+};
+
 export default function RegisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm<RegisterFormValues>();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: RegisterFormValues) => {
     console.log(data);
+    reset();
   };
 
   return (
@@ -25,6 +34,13 @@ export default function RegisterForm() {
           label="Nama"
           name="name"
           register={register}
+          rules={{
+            required: "Nama wajib diisi",
+            minLength: {
+              value: 3,
+              message: "Nama minimal 3 karakter",
+            },
+          }}
           error={errors.name?.message as string}
         />
         <Input
@@ -32,24 +48,50 @@ export default function RegisterForm() {
           name="email"
           type="email"
           register={register}
+          rules={{
+            required: "Email wajib diisi",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Format email tidak valid",
+            },
+          }}
           error={errors.email?.message as string}
         />
         <PasswordInput
           label="Password"
           name="password"
           register={register}
+          rules={{
+            required: "Password wajib diisi",
+            minLength: {
+              value: 8,
+              message: "Password minimal 8 karakter",
+            },
+            pattern: {
+              value: /^(?=.*[A-Za-z])(?=.*\d).+$/,
+              message: "Password harus berisi huruf dan angka",
+            },
+          }}
           error={errors.password?.message as string}
         />
         <Textarea
           label="Bio"
           name="bio"
           register={register}
+          rules={{
+            required: "Bio wajib diisi",
+            minLength: {
+              value: 20,
+              message: "Bio minimal 20 karakter",
+            },
+          }}
           error={errors.bio?.message as string}
         />
         <Select
           label="Event"
           name="event"
           register={register}
+          rules={{ required: "Silakan pilih event" }}
           options={[
             { label: "Invofest", value: "invofest" },
             { label: "Workshop AI", value: "ai" },

@@ -1,4 +1,4 @@
-import RegisterForm from './organisms/RegisterForm';
+import RegisterForm from '../components/organisms/RegisterForm';
 
 export default function RegisterSection() {
   return (

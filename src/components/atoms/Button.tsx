@@ -15,8 +15,8 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const base = "px-4 py-2.5 rounded-md font-semibold transition-all duration-300 flex items-center justify-center";
   const styles = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700 active:scale-95 shadow-sm",
-    outline: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50 active:scale-95",
+    primary: "bg-[#8b2551] text-white hover:bg-[#6c1c3f] active:scale-95 shadow-sm",
+    outline: "border-2 border-[#8b2551] text-[#8b2551] hover:bg-[#8b2551]/10 active:scale-95",
   };
 
   return (

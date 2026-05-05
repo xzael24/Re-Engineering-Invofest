@@ -6,6 +6,8 @@ interface PasswordInputProps {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rules?: any;
   error?: string;
 }
 
@@ -13,6 +15,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
   label,
   name,
   register,
+  rules,
   error,
 }) => {
   const [show, setShow] = useState(false);
@@ -23,7 +26,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
       <div className="relative">
         <input
           type={show ? "text" : "password"}
-          {...register(name)}
+          {...register(name, rules)}
           className={`border rounded-md px-3 py-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow ${
             error ? "border-red-500 ring-red-500" : "border-gray-300"
           }`}

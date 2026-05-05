@@ -1,4 +1,4 @@
-import Button from './ui/Button';
+import Button from '../components/ui/Button';
 import maskotSeminar from '../assets/Maskot-Seminar.png';
 
 export default function SeminarSection() {

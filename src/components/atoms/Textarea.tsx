@@ -5,6 +5,8 @@ interface TextareaProps {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rules?: any;
   error?: string;
   placeholder?: string;
 }
@@ -13,6 +15,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   label,
   name,
   register,
+  rules,
   error,
   placeholder,
 }) => {
@@ -20,7 +23,7 @@ export const Textarea: React.FC<TextareaProps> = ({
     <div className="flex flex-col gap-1">
       <label className="font-medium text-gray-700">{label}</label>
       <textarea
-        {...register(name)}
+        {...register(name, rules)}
         placeholder={placeholder}
         className={`border rounded-md px-3 py-2 min-h-[100px] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow ${
           error ? "border-red-500 ring-red-500" : "border-gray-300"

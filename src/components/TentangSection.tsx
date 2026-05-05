@@ -1,5 +1,5 @@
-import Button from "./ui/Button";
-import Card from "./ui/Card";
+import Button from "../components/ui/Button";
+import Card from "../components/ui/Card";
 
 export default function TentangSection() {
   return (

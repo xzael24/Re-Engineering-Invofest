@@ -1,4 +1,4 @@
-import Button from './ui/Button';
+import Button from '../components/ui/Button';
 import maskotWorkshop from '../assets/Maskot-Workshop.png';
 
 export default function WorkshopSection() {

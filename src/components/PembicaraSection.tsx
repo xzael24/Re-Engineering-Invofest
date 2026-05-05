@@ -1,5 +1,5 @@
 
-import CardPembicara from './ui/CardPembicara';
+import CardPembicara from '../components/ui/CardPembicara';
 
 export default function PembicaraSection() {
   return (

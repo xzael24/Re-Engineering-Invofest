@@ -1,4 +1,4 @@
-import Button from './ui/Button';
+import Button from '../components/ui/Button';
 import maskotTalkshow from '../assets/Maskot-Talkshow.png';
 
 export default function TalkshowSection() {
