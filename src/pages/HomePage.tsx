@@ -42,7 +42,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Button onClick={handleDaftarEvent}>
-              DAFTAR EVENT SEKARANG (Pa Jamal tugas ke-3 disini btw)
+              DAFTAR EVENT SEKARANG (Pa Jamal tugas ke-2 disini btw)
             </Button>
             <Button variant="outline">HUBUNGI PANITIA</Button>
           </div>
