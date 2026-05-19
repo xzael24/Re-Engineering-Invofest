@@ -1,5 +1,5 @@
 import { Home, Contact, Trophy, Wrench, Mic } from 'lucide-react';
-import navLogo from '../assets/nav-logo.png';
+import navLogo from '../../assets/nav-logo.png';
 
 export default function Footer() {
   return (

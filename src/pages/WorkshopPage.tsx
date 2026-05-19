@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import workshopHero from '../assets/Maskot-Workshop.png';
 import lhuqitaImage from '../assets/lhuqita.png';
 import dendiImage from '../assets/dendi.png';
@@ -6,8 +6,8 @@ import danangImage from '../assets/danang.png';
 import { CalendarDays, Clock3, MapPin, Code2, Smartphone, Shield } from 'lucide-react';
 import Button from '../components/ui/Button';
 import ButtonScroll from '../components/ui/ButtonScroll';
-import FaqSection from '../components/FaqSection';
-import Footer from '../components/Footer';
+import FaqSection from '../components/sections/FaqSection';
+import Footer from '../components/layout/Footer';
 
 export default function WorkshopPage() {
   const handleScrollToAbout = () => {

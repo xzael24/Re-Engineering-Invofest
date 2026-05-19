@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import talkshowHero from '../assets/Maskot-Talkshow.png';
 import ichsanImage from '../assets/ichsan.png';
 import zaimImage from '../assets/zaim.png';
@@ -7,8 +7,8 @@ import bayuImage from '../assets/bayu.png';
 import { CalendarDays, Clock3, MapPin, Building2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import ButtonScroll from '../components/ui/ButtonScroll';
-import FaqSection from '../components/FaqSection';
-import Footer from '../components/Footer';
+import FaqSection from '../components/sections/FaqSection';
+import Footer from '../components/layout/Footer';
 
 export default function TalkshowPage() {
   const handleScrollToAbout = () => {

@@ -1,19 +1,19 @@
-import media1 from '../assets/media/BPM PNG.png';
-import media2 from '../assets/media/HMP D3 TEKNIK MESIN UHN.png';
-import media3 from '../assets/media/HMPTI_ITB_STIKOM_BALI.png';
-import media4 from '../assets/media/LOGO HIMAPIK.jpg';
-import media5 from '../assets/media/LOGO HMP D3 DKV.png';
-import media6 from '../assets/media/LOGO HMP D3 PERHOTELAN.png';
-import media7 from '../assets/media/LOGO HMP TEKNIK KOMPUTER .png';
-import media8 from '../assets/media/LOGO HMTIKA.png';
-import media9 from '../assets/media/Logo BEM.png';
-import media10 from '../assets/media/Logo warga tech.png';
-import media11 from '../assets/media/PERMIKOMNAS RI.png';
-import media12 from '../assets/media/logo HMTI UMMUS.png';
-import media13 from '../assets/media/logo hima elektro.png';
-import media14 from '../assets/media/logo info lomba IT.png';
-import media15 from '../assets/media/lomba it ii.png';
-import media16 from '../assets/media/permikomnas.png';
+import media1 from '../../assets/media/BPM PNG.png';
+import media2 from '../../assets/media/HMP D3 TEKNIK MESIN UHN.png';
+import media3 from '../../assets/media/HMPTI_ITB_STIKOM_BALI.png';
+import media4 from '../../assets/media/LOGO HIMAPIK.jpg';
+import media5 from '../../assets/media/LOGO HMP D3 DKV.png';
+import media6 from '../../assets/media/LOGO HMP D3 PERHOTELAN.png';
+import media7 from '../../assets/media/LOGO HMP TEKNIK KOMPUTER .png';
+import media8 from '../../assets/media/LOGO HMTIKA.png';
+import media9 from '../../assets/media/Logo BEM.png';
+import media10 from '../../assets/media/Logo warga tech.png';
+import media11 from '../../assets/media/PERMIKOMNAS RI.png';
+import media12 from '../../assets/media/logo HMTI UMMUS.png';
+import media13 from '../../assets/media/logo hima elektro.png';
+import media14 from '../../assets/media/logo info lomba IT.png';
+import media15 from '../../assets/media/lomba it ii.png';
+import media16 from '../../assets/media/permikomnas.png';
 
 export default function MediaSection() {
   const medias = [

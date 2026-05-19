@@ -1,6 +1,6 @@
 import { Home, Trophy, Presentation, Monitor, Mic, UserCircle } from 'lucide-react';
-import navLogo from '../assets/nav-logo.png';
-import Navlink from './ui/Navlink';
+import navLogo from '../../assets/nav-logo.png';
+import Navlink from '../ui/Navlink';
 
 export default function Header() {
   const pathname = window.location.pathname;

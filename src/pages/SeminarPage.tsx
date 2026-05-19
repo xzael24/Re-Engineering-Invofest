@@ -1,12 +1,12 @@
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import seminarHero from '../assets/Maskot-Seminar.png';
 import deryImage from '../assets/Dery.png';
 import sowamImage from '../assets/Sowam.png';
 import { CalendarDays, Clock3, MapPin, Building2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import ButtonScroll from '../components/ui/ButtonScroll';
-import FaqSection from '../components/FaqSection';
-import Footer from '../components/Footer';
+import FaqSection from '../components/sections/FaqSection';
+import Footer from '../components/layout/Footer';
 
 export default function SeminarPage() {
   const handleScrollToAbout = () => {

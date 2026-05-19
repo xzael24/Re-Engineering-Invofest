@@ -1,3 +1,4 @@
+import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage.tsx';
 import CompetitionPage from './pages/CompetitionPage.tsx';
 import SeminarPage from './pages/SeminarPage.tsx';
@@ -6,17 +7,40 @@ import TalkshowPage from './pages/TalkshowPage.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
+import { useAuthStore } from './stores/authStore.ts';
+
+// Protected Route — redirect ke login jika belum login
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuthStore();
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return <>{children}</>;
+}
 
 function App() {
-  const pathname = window.location.pathname;
-  if (pathname === '/competition') return <CompetitionPage />;
-  if (pathname === '/seminar') return <SeminarPage />;
-  if (pathname === '/workshop') return <WorkshopPage />;
-  if (pathname === '/talkshow') return <TalkshowPage />;
-  if (pathname === '/login') return <LoginPage />;
-  if (pathname === '/register') return <RegisterPage />;
-  if (pathname === '/dashboard') return <DashboardPage />;
-  return <HomePage />;
+  return (
+    <Routes>
+      {/* Public routes */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/competition" element={<CompetitionPage />} />
+      <Route path="/seminar" element={<SeminarPage />} />
+      <Route path="/workshop" element={<WorkshopPage />} />
+      <Route path="/talkshow" element={<TalkshowPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+
+      {/* Protected route — hanya bisa diakses setelah login */}
+      <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <DashboardPage />
+        </ProtectedRoute>
+      } />
+
+      {/* Fallback — redirect ke home */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 }
 
 export default App

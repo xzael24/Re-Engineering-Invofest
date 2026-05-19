@@ -1,14 +1,14 @@
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import competitionHero from '../assets/Maskot-Lomba.png';
 import posterDesignImage from '../assets/Poster-Design.png';
 import uiuxDesignImage from '../assets/UI_UX-Design.png';
 import webDesignImage from '../assets/Web-Design.png';
 import Button from '../components/ui/Button';
 import ButtonScroll from '../components/ui/ButtonScroll';
-import FaqSection from '../components/FaqSection';
-import SponsorSection from '../components/SponsorSection';
-import MediaSection from '../components/MediaSection';
-import Footer from '../components/Footer';
+import FaqSection from '../components/sections/FaqSection';
+import SponsorSection from '../components/sections/SponsorSection';
+import MediaSection from '../components/sections/MediaSection';
+import Footer from '../components/layout/Footer';
 
 export default function CompetitionPage() {
   const handleScrollToDescription = () => {

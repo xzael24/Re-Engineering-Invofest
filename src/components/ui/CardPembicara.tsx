@@ -1,5 +1,3 @@
-
-
 interface CardPembicaraProps {
   name: string;
   role: string;

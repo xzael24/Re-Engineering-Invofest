@@ -1,4 +1,4 @@
-import Collapse from '../components/ui/Collapse';
+import Collapse from '../ui/Collapse';
 
 export default function FaqSection() {
   const faqs = [

@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { Input } from "../atoms/Input";
-import { PasswordInput } from "../atoms/PasswordInput";
-import { Textarea } from "../atoms/Textarea";
-import { Select } from "../atoms/Select";
-import { Button } from "../atoms/Button";
+import { Input } from '../ui/Input';
+import { PasswordInput } from '../ui/PasswordInput';
+import { Textarea } from '../ui/Textarea';
+import { Select } from '../ui/Select';
+import { Button } from '../ui/SubmitButton';
 
 type RegisterFormValues = {
   name: string;

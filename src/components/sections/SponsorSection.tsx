@@ -1,9 +1,9 @@
-import dicoding from '../assets/sponsor/dicoding_official.png';
-import domainesia from '../assets/sponsor/domainesia.png';
-import bahariInn from '../assets/sponsor/bahari_inn.jpg';
-import bigBerry from '../assets/sponsor/big_berry.png';
-import indoPrint from '../assets/sponsor/indo_print.jpg';
-import plazaHotel from '../assets/sponsor/plaza_hotel_tegal.jpg';
+import dicoding from '../../assets/sponsor/dicoding_official.png';
+import domainesia from '../../assets/sponsor/domainesia.png';
+import bahariInn from '../../assets/sponsor/bahari_inn.jpg';
+import bigBerry from '../../assets/sponsor/big_berry.png';
+import indoPrint from '../../assets/sponsor/indo_print.jpg';
+import plazaHotel from '../../assets/sponsor/plaza_hotel_tegal.jpg';
 
 export default function SponsorSection() {
   const sponsors = [

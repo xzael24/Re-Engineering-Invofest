@@ -1,19 +1,19 @@
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import maskotHero from '../assets/Maskot-Hero.png';
 import textImage from '../assets/text-image.png';
 import Button from '../components/ui/Button';
 import ButtonScroll from '../components/ui/ButtonScroll';
-import PembicaraSection from '../components/PembicaraSection';
-import TentangSection from '../components/TentangSection';
-import SeminarSection from '../components/SeminarSection';
-import TalkshowSection from '../components/TalkshowSection';
-import WorkshopSection from '../components/WorkshopSection';
-import CompetitionSection from '../components/CompetitionSection';
-import FaqSection from '../components/FaqSection';
-import SponsorSection from '../components/SponsorSection';
-import MediaSection from '../components/MediaSection';
-import Footer from '../components/Footer';
-import RegisterSection from '../components/RegisterSection';
+import PembicaraSection from '../components/sections/PembicaraSection';
+import TentangSection from '../components/sections/TentangSection';
+import SeminarSection from '../components/sections/SeminarSection';
+import TalkshowSection from '../components/sections/TalkshowSection';
+import WorkshopSection from '../components/sections/WorkshopSection';
+import CompetitionSection from '../components/sections/CompetitionSection';
+import FaqSection from '../components/sections/FaqSection';
+import SponsorSection from '../components/sections/SponsorSection';
+import MediaSection from '../components/sections/MediaSection';
+import Footer from '../components/layout/Footer';
+import RegisterSection from '../components/sections/RegisterSection';
 
 export default function HomePage() {
   const handleDaftarEvent = () => {

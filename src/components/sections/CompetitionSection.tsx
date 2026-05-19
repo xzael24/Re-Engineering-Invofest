@@ -1,7 +1,19 @@
-import Button from '../components/ui/Button';
-import maskotLomba from '../assets/Maskot-Lomba.png';
+import { useEffect } from 'react';
+import Button from '../ui/Button';
+import maskotLomba from '../../assets/Maskot-Lomba.png';
+import { useEventStore } from '../../stores/eventStore';
 
 export default function CompetitionSection() {
+  const { events, fetchEvents, isLoading } = useEventStore();
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
+
+  const competitionEvent = events.find(
+    (event) => event.category?.name.toLowerCase().includes('competition') || event.category?.name.toLowerCase().includes('lomba')
+  );
+
   return (
     <>
       <div className="w-full relative -mt-1 z-10 pointer-events-none overflow-hidden">
@@ -43,9 +55,32 @@ export default function CompetitionSection() {
             <h2 className="text-[40px] md:text-[48px] font-medium text-[#8b2551] mb-6 tracking-tight">
               IT Competition
             </h2>
-            <p className="text-slate-600/90 text-[16px] md:text-[18px] leading-relaxed mb-8">
-              "<strong className="text-slate-800 font-bold">From Creation to Innovation</strong>" adalah sebuah kompetisi IT yang dirancang untuk menjembatani jurang antara ide kreatif dan inovasi nyata. Ajang ini menantang para talenta digital untuk tidak hanya menciptakan sesuatu yang baru, tetapi juga mengembangkannya menjadi solusi yang berdampak, berkelanjutan, dan bernilai guna tinggi.
-            </p>
+            
+            {isLoading ? (
+              <div className="animate-pulse flex flex-col gap-4 mb-8">
+                <div className="h-4 bg-slate-200 rounded w-full"></div>
+                <div className="h-4 bg-slate-200 rounded w-5/6"></div>
+                <div className="h-4 bg-slate-200 rounded w-4/6"></div>
+              </div>
+            ) : (
+              <div className="text-slate-600/90 text-[16px] md:text-[18px] leading-relaxed mb-8">
+                {competitionEvent ? (
+                  <>
+                    <strong className="text-slate-800 font-bold block mb-2 text-xl">
+                      "{competitionEvent.name.replace('IT Competition - ', '')}"
+                    </strong>
+                    {competitionEvent.description}
+                    <div className="mt-4 text-sm text-[#8b2551] font-semibold">
+                      <p>📍 {competitionEvent.location}</p>
+                      <p>📅 {new Date(competitionEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    </div>
+                  </>
+                ) : (
+                  "Belum ada informasi kompetisi tersedia saat ini."
+                )}
+              </div>
+            )}
+
             <Button className="uppercase tracking-wider">
               DAFTAR IT COMPETITION
             </Button>

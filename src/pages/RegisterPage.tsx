@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import RegisterForm from "../components/organisms/RegisterForm";
+import Header from '../components/layout/Header';
+import RegisterForm from '../components/auth/RegisterForm';
 import navLogo from "../assets/nav-logo.png";
 
 export default function RegisterPage() {
