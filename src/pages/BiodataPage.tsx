@@ -23,8 +23,8 @@ export default function BiodataPage() {
       return;
     }
 
-    if (file.size > 2 * 1024 * 1024) {
-      setUploadMessage({ type: 'error', text: 'Ukuran file maksimal 2MB' });
+    if (file.size > 3 * 1024 * 1024) {
+      setUploadMessage({ type: 'error', text: 'Ukuran file maksimal adalah 3MB' });
       setTimeout(() => setUploadMessage(null), 4000);
       return;
     }
@@ -40,7 +40,7 @@ export default function BiodataPage() {
         if (success) {
           setUploadMessage({ type: 'success', text: 'Foto profil berhasil diperbarui!' });
         } else {
-          setUploadMessage({ type: 'error', text: 'Gagal mengupload foto profil' });
+          setUploadMessage({ type: 'error', text: 'Gagal mengupload foto profil (Max 3MB)' });
         }
       } catch (err: any) {
         setUploadMessage({ type: 'error', text: err.message || 'Terjadi kesalahan saat upload' });
@@ -78,7 +78,7 @@ export default function BiodataPage() {
           <div 
             onClick={handlePhotoClick}
             className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white/40 cursor-pointer group shadow-inner flex items-center justify-center bg-white/20 backdrop-blur-sm transition duration-300 hover:border-white"
-            title="Klik untuk ganti foto profil"
+            title="Klik untuk ganti foto profil (Max 3MB)"
           >
             {user?.photo ? (
               <img 
@@ -95,7 +95,7 @@ export default function BiodataPage() {
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
               <Camera className="w-7 h-7 text-white/90" />
             </div>
-
+            
             {isUploading && (
               <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                 <Loader2 className="w-7 h-7 text-white animate-spin" />
@@ -113,7 +113,10 @@ export default function BiodataPage() {
             <h2 className="text-2xl font-bold">{user?.name || "Nama Mahasiswa"}</h2>
             <p className="text-white/80 text-lg">{user?.nim || "NIM"}</p>
             <p className="text-white/60 text-sm mt-1">Mahasiswa D4 Teknik Informatika</p>
+            <p className="text-white/40 text-xs mt-2">Format: JPG, PNG, WEBP (Maksimal 3MB)</p>
           </div>
+
+
         </div>
       </div>
 
