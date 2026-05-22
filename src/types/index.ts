@@ -1,7 +1,3 @@
-// ==================== TypeScript Interfaces ====================
-// Interface untuk semua entitas yang digunakan di frontend
-
-// Category / CategoryEvent
 export interface Category {
   id: number;
   name: string;
@@ -12,7 +8,7 @@ export interface CategoryFormData {
   name: string;
 }
 
-// Pembicara (Speaker)
+
 export interface Pembicara {
   id: number;
   name: string;
@@ -31,7 +27,7 @@ export interface PembicaraFormData {
   expertise?: string[];
 }
 
-// Event
+
 export interface Event {
   id: number;
   name: string;
@@ -54,13 +50,14 @@ export interface EventFormData {
   description: string;
 }
 
-// User & Auth
+
 export interface User {
   id: number;
   name: string;
   nim: string;
   bio: string;
   event: string;
+  photo?: string;
   createdAt: string;
 }
 
@@ -75,7 +72,7 @@ export interface LoginResponse {
   token: string;
 }
 
-// API Response generik
+
 export interface ApiResponse<T> {
   message: string;
   data: T;

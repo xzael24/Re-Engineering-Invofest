@@ -3,9 +3,9 @@ import React from "react";
 interface BaseInputProps {
   label: string;
   name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   register: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   rules?: any;
   error?: string;
   type?: string;

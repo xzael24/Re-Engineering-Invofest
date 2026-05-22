@@ -1,7 +1,3 @@
-// ==================== Auth Store (Zustand) ====================
-// Global state management untuk autentikasi menggunakan Zustand
-// Login menggunakan NIM dan Password sesuai ketentuan UAS
-
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { User } from "../types";
@@ -14,9 +10,10 @@ interface AuthState {
   isLoading: boolean;
   error: string | null;
 
-  // Actions
+
   login: (nim: string, password: string) => Promise<boolean>;
   register: (data: any) => Promise<boolean>;
+  updatePhoto: (file: File) => Promise<boolean>;
   logout: () => void;
   clearError: () => void;
 }
@@ -34,7 +31,7 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
         try {
           const response = await authApi.login(nim, password);
-          // Simpan token ke localStorage untuk API client
+
           localStorage.setItem("token", response.token);
           set({
             user: response.user,
@@ -57,13 +54,32 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
         try {
           await authApi.register(data);
-          // Setelah berhasil register, auto login atau cukup return true
+
           set({ isLoading: false, error: null });
           return true;
         } catch (error: any) {
           set({
             isLoading: false,
             error: error.message || "Registrasi gagal",
+          });
+          return false;
+        }
+      },
+
+      updatePhoto: async (file: File) => {
+        set({ isLoading: true, error: null });
+        try {
+          const response = await authApi.updatePhoto(file);
+          set({
+            user: response.user,
+            isLoading: false,
+            error: null,
+          });
+          return true;
+        } catch (error: any) {
+          set({
+            isLoading: false,
+            error: error.message || "Gagal mengunggah foto profil",
           });
           return false;
         }
@@ -82,7 +98,7 @@ export const useAuthStore = create<AuthState>()(
       clearError: () => set({ error: null }),
     }),
     {
-      name: "auth-storage", // key di localStorage
+      name: "auth-storage",
       partialize: (state) => ({
         user: state.user,
         token: state.token,

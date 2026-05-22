@@ -3,9 +3,9 @@ import React from "react";
 interface TextareaProps {
   label: string;
   name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   register: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   rules?: any;
   error?: string;
   placeholder?: string;

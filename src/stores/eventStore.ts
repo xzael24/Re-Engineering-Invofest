@@ -1,5 +1,5 @@
-// ==================== Event Store (Zustand) ====================
-// Global state management untuk CRUD Event menggunakan Zustand
+
+
 
 import { create } from "zustand";
 import type { Event, EventFormData } from "../types";
@@ -10,7 +10,7 @@ interface EventState {
   isLoading: boolean;
   error: string | null;
 
-  // Actions
+
   fetchEvents: () => Promise<void>;
   createEvent: (data: EventFormData) => Promise<boolean>;
   updateEvent: (id: number, data: EventFormData) => Promise<boolean>;

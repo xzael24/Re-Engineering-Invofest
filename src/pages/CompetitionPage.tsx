@@ -9,14 +9,10 @@ import FaqSection from '../components/sections/FaqSection';
 import SponsorSection from '../components/sections/SponsorSection';
 import MediaSection from '../components/sections/MediaSection';
 import Footer from '../components/layout/Footer';
+import { useNavigate } from 'react-router-dom';
 
 export default function CompetitionPage() {
-  const handleScrollToDescription = () => {
-    const target = document.getElementById('competition-description');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800 relative overflow-hidden flex flex-col selection:bg-pink-200">
@@ -37,7 +33,7 @@ export default function CompetitionPage() {
             mampu mewujudkan masa depan yang berkelanjutan.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Button onClick={handleScrollToDescription}>INFO SELENGKAPNYA</Button>
+            <Button onClick={() => navigate('/register')}>Daftar Sekarang</Button>
             <Button variant="outline">HUBUNGI PANITIA</Button>
           </div>
         </div>

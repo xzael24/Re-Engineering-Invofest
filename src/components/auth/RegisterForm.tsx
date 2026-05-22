@@ -13,7 +13,7 @@ type RegisterFormValues = {
   password: string;
   bio: string;
   event: string;
-  nim: string; // backend requires NIM
+  nim: string;
 };
 
 export default function RegisterForm() {
@@ -37,7 +37,7 @@ export default function RegisterForm() {
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-gray-100">
       <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Registrasi</h2>
-      
+
       {error && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
           {error}

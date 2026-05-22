@@ -1,6 +1,3 @@
-// ==================== Category Store (Zustand) ====================
-// Global state management untuk CRUD Category menggunakan Zustand
-
 import { create } from "zustand";
 import type { Category, CategoryFormData } from "../types";
 import { categoryApi } from "../lib/api";
@@ -10,7 +7,7 @@ interface CategoryState {
   isLoading: boolean;
   error: string | null;
 
-  // Actions
+
   fetchCategories: () => Promise<void>;
   createCategory: (data: CategoryFormData) => Promise<boolean>;
   updateCategory: (id: number, data: CategoryFormData) => Promise<boolean>;
@@ -37,7 +34,7 @@ export const useCategoryStore = create<CategoryState>()((set) => ({
     set({ isLoading: true, error: null });
     try {
       await categoryApi.create(data);
-      // Refresh data setelah create
+
       const categories = await categoryApi.getAll();
       set({ categories, isLoading: false });
       return true;

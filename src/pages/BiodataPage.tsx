@@ -1,19 +1,100 @@
-// ==================== Biodata Page ====================
-// Menu khusus menampilkan biodata mahasiswa pembuat website
-
 import { useAuthStore } from "../stores/authStore";
-import { User, FileText, GraduationCap } from "lucide-react";
+import { User, FileText, GraduationCap, Camera, Loader2 } from "lucide-react";
+import { BACKEND_URL } from "../lib/api";
+import { useRef, useState } from "react";
 
 export default function BiodataPage() {
-  const { user } = useAuthStore();
+  const { user, updatePhoto } = useAuthStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadMessage, setUploadMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+  const handlePhotoClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setUploadMessage({ type: 'error', text: 'Hanya file gambar (.jpg, .png, etc.) yang diperbolehkan' });
+      setTimeout(() => setUploadMessage(null), 4000);
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadMessage({ type: 'error', text: 'Ukuran file maksimal 5MB' });
+      setTimeout(() => setUploadMessage(null), 4000);
+      return;
+    }
+
+    setIsUploading(true);
+    setUploadMessage(null);
+    try {
+      const success = await updatePhoto(file);
+      if (success) {
+        setUploadMessage({ type: 'success', text: 'Foto profil berhasil diperbarui!' });
+      } else {
+        setUploadMessage({ type: 'error', text: 'Gagal mengupload foto profil' });
+      }
+    } catch (err: any) {
+      setUploadMessage({ type: 'error', text: err.message || 'Terjadi kesalahan saat upload' });
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      setTimeout(() => setUploadMessage(null), 4000);
+    }
+  };
 
   return (
     <div className="space-y-6">
+      {uploadMessage && (
+        <div className={`p-4 rounded-xl text-sm font-semibold border flex items-center gap-2 transition duration-300 animate-fadeIn ${
+          uploadMessage.type === 'success' 
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
+            : 'bg-rose-50 border-rose-200 text-rose-800'
+        }`}>
+          {uploadMessage.text}
+        </div>
+      )}
+
       <div className="bg-gradient-to-br from-[#8b2551] to-[#c2185b] rounded-2xl p-8 text-white shadow-lg">
         <div className="flex items-center gap-6">
-          <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-4xl font-bold">
-            {user?.name?.charAt(0)?.toUpperCase() || "M"}
+          <div 
+            onClick={handlePhotoClick}
+            className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white/40 cursor-pointer group shadow-inner flex items-center justify-center bg-white/20 backdrop-blur-sm transition duration-300 hover:border-white"
+            title="Klik untuk ganti foto profil"
+          >
+            {user?.photo ? (
+              <img 
+                src={`${BACKEND_URL}${user.photo}`} 
+                alt={user.name} 
+                className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+              />
+            ) : (
+              <div className="text-4xl font-bold text-white transition duration-300 group-hover:scale-105">
+                {user?.name?.charAt(0)?.toUpperCase() || "M"}
+              </div>
+            )}
+            
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+              <Camera className="w-7 h-7 text-white/90" />
+            </div>
+
+            {isUploading && (
+              <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                <Loader2 className="w-7 h-7 text-white animate-spin" />
+              </div>
+            )}
           </div>
+          <input 
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/*"
+            className="hidden"
+          />
           <div>
             <h2 className="text-2xl font-bold">{user?.name || "Nama Mahasiswa"}</h2>
             <p className="text-white/80 text-lg">{user?.nim || "NIM"}</p>

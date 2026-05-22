@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useAuthStore } from "../stores/authStore";
-import CategoryPanel from '../components/dashboard/CategoryPanel';
-import PembicaraPanel from '../components/dashboard/PembicaraPanel';
-import EventPanel from '../components/dashboard/EventPanel';
-import BiodataPage from "./BiodataPage";
 import navLogo from "../assets/nav-logo.png";
 import { Home, FolderOpen, Mic, Calendar, User, LogOut, type LucideIcon } from "lucide-react";
+import { BACKEND_URL } from "../lib/api";
 
 type MenuKey = "dashboard" | "category" | "pembicara" | "event" | "biodata";
 
 export default function DashboardPage() {
-  const [activeMenu, setActiveMenu] = useState<MenuKey>("dashboard");
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
+
+  const pathParts = location.pathname.split("/");
+  const lastPart = pathParts[pathParts.length - 1];
+  const activeMenu: MenuKey = (lastPart === "dashboard" || !lastPart) ? "dashboard" : (lastPart as MenuKey);
 
   const menuItems: { key: MenuKey; label: string; icon: LucideIcon }[] = [
     { key: "dashboard", label: "Dashboard", icon: Home },
@@ -28,45 +28,18 @@ export default function DashboardPage() {
     { key: "biodata", label: "Biodata", icon: User },
   ];
 
+  const handleNav = (key: MenuKey) => {
+    if (key === "dashboard") {
+      navigate("/dashboard");
+    } else {
+      navigate(`/dashboard/${key}`);
+    }
+  };
+
   const btnClass = (menu: MenuKey) =>
     activeMenu === menu
       ? "w-full text-left rounded-lg px-4 py-3 bg-[#8b2551] text-white font-semibold shadow-sm hover:bg-[#6c1c3f] transition-colors flex items-center gap-3"
       : "w-full text-left rounded-lg px-4 py-3 border border-[#8b2551]/30 text-[#8b2551] font-semibold hover:bg-[#8b2551]/10 transition-colors flex items-center gap-3";
-
-  const renderContent = () => {
-    switch (activeMenu) {
-      case "category": return <CategoryPanel />;
-      case "pembicara": return <PembicaraPanel />;
-      case "event": return <EventPanel />;
-      case "biodata": return <BiodataPage />;
-      default:
-        return (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-br from-[#8b2551] to-[#c2185b] rounded-2xl p-8 text-white">
-              <h1 className="text-3xl font-bold mb-2">Selamat Datang, {user?.name || "User"}!</h1>
-              <p className="text-white/80">Kelola data event dengan mudah melalui dashboard ini.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <button onClick={() => setActiveMenu("category")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col items-start">
-                <FolderOpen className="w-8 h-8 text-[#8b2551] mb-3" />
-                <p className="font-bold text-gray-800">Category</p>
-                <p className="text-sm text-gray-500">Kelola kategori event</p>
-              </button>
-              <button onClick={() => setActiveMenu("pembicara")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col items-start">
-                <Mic className="w-8 h-8 text-[#8b2551] mb-3" />
-                <p className="font-bold text-gray-800">Pembicara</p>
-                <p className="text-sm text-gray-500">Kelola data pembicara</p>
-              </button>
-              <button onClick={() => setActiveMenu("event")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col items-start">
-                <Calendar className="w-8 h-8 text-[#8b2551] mb-3" />
-                <p className="font-bold text-gray-800">Event</p>
-                <p className="text-sm text-gray-500">Kelola data event</p>
-              </button>
-            </div>
-          </div>
-        );
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#f7f8fb] font-sans text-gray-800">
@@ -79,21 +52,33 @@ export default function DashboardPage() {
             {menuItems.map((item) => {
               const Icon = item.icon;
               return (
-                <button key={item.key} onClick={() => setActiveMenu(item.key)} className={btnClass(item.key)}>
+                <button key={item.key} onClick={() => handleNav(item.key)} className={btnClass(item.key)}>
                   <Icon className="w-5 h-5" /> {item.label}
                 </button>
               );
             })}
           </nav>
-          <div className="pt-6 border-t border-gray-100 space-y-2">
-            <div className="px-4 py-2 text-xs text-gray-400">Login: {user?.nim || "-"}</div>
+          <div className="pt-6 border-t border-gray-100 space-y-3">
+            <div className="flex items-center gap-3 px-3 py-2 bg-[#fdf5f9] rounded-xl border border-[#8b2551]/10">
+              <div className="w-10 h-10 rounded-full bg-[#8b2551] text-white flex items-center justify-center font-bold text-sm overflow-hidden shrink-0 shadow-inner">
+                {user?.photo ? (
+                  <img src={`${BACKEND_URL}${user.photo}`} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  user?.name?.charAt(0).toUpperCase() || "M"
+                )}
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-sm font-bold text-[#8b2551] truncate">{user?.name || "User"}</p>
+                <p className="text-xs text-slate-500 truncate">{user?.nim || ""}</p>
+              </div>
+            </div>
             <button onClick={handleLogout} className="w-full text-left rounded-lg px-4 py-3 bg-red-50 text-red-600 font-semibold hover:bg-red-100 transition-colors flex items-center gap-3">
               <LogOut className="w-5 h-5" /> Logout
             </button>
           </div>
         </aside>
         <main className="flex-1 p-8 md:p-10">
-          {renderContent()}
+          <Outlet />
         </main>
       </div>
     </div>

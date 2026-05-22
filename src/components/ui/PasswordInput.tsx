@@ -4,9 +4,9 @@ import { Eye, EyeOff } from "lucide-react";
 interface PasswordInputProps {
   label: string;
   name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   register: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   rules?: any;
   error?: string;
 }

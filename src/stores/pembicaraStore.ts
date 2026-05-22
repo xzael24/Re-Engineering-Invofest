@@ -1,5 +1,5 @@
-// ==================== Pembicara Store (Zustand) ====================
-// Global state management untuk CRUD Pembicara menggunakan Zustand
+
+
 
 import { create } from "zustand";
 import type { Pembicara, PembicaraFormData } from "../types";
@@ -10,7 +10,7 @@ interface PembicaraState {
   isLoading: boolean;
   error: string | null;
 
-  // Actions
+
   fetchPembicaras: () => Promise<void>;
   createPembicara: (data: PembicaraFormData) => Promise<boolean>;
   updatePembicara: (id: number, data: PembicaraFormData) => Promise<boolean>;

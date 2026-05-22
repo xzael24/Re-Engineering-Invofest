@@ -1,16 +1,14 @@
-// ==================== API Client ====================
-// Centralized API client untuk komunikasi dengan backend Express
-
-import type { Category, Pembicara, Event, LoginResponse, ApiResponse } from "../types";
+import type { Category, Pembicara, Event, LoginResponse, ApiResponse, User } from "../types";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+export const BACKEND_URL = API_BASE.replace("/api", "");
 
-// Helper untuk fetch dengan error handling dan TypeScript generics
+
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const token = localStorage.getItem("token");
 
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
+    ...(options?.body instanceof FormData ? {} : { "Content-Type": "application/json" }),
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options?.headers,
   };
@@ -28,7 +26,7 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   return res.json();
 }
 
-// ==================== Auth API ====================
+
 export const authApi = {
   login: (nim: string, password: string) =>
     request<LoginResponse>("/users/login", {
@@ -40,9 +38,17 @@ export const authApi = {
       method: "POST",
       body: JSON.stringify(data),
     }),
+  updatePhoto: (file: File) => {
+    const formData = new FormData();
+    formData.append("photo", file);
+    return request<{ message: string; user: User }>("/users/profile/photo", {
+      method: "PUT",
+      body: formData,
+    });
+  },
 };
 
-// ==================== Category API ====================
+
 export const categoryApi = {
   getAll: () => request<Category[]>("/categories"),
   getById: (id: number) => request<Category>(`/categories/${id}`),
@@ -60,7 +66,7 @@ export const categoryApi = {
     request<{ message: string }>(`/categories/${id}`, { method: "DELETE" }),
 };
 
-// ==================== Pembicara API ====================
+
 export const pembicaraApi = {
   getAll: () => request<Pembicara[]>("/pembicaras"),
   getById: (id: number) => request<Pembicara>(`/pembicaras/${id}`),
@@ -78,7 +84,7 @@ export const pembicaraApi = {
     request<{ message: string }>(`/pembicaras/${id}`, { method: "DELETE" }),
 };
 
-// ==================== Event API ====================
+
 export const eventApi = {
   getAll: () => request<Event[]>("/events"),
   getById: (id: number) => request<Event>(`/events/${id}`),
