@@ -6,6 +6,7 @@ import PembicaraPanel from '../components/dashboard/PembicaraPanel';
 import EventPanel from '../components/dashboard/EventPanel';
 import BiodataPage from "./BiodataPage";
 import navLogo from "../assets/nav-logo.png";
+import { Home, FolderOpen, Mic, Calendar, User, LogOut, type LucideIcon } from "lucide-react";
 
 type MenuKey = "dashboard" | "category" | "pembicara" | "event" | "biodata";
 
@@ -19,12 +20,12 @@ export default function DashboardPage() {
     navigate("/login");
   };
 
-  const menuItems: { key: MenuKey; label: string; icon: string }[] = [
-    { key: "dashboard", label: "Dashboard", icon: "🏠" },
-    { key: "category", label: "Category", icon: "📂" },
-    { key: "pembicara", label: "Pembicara", icon: "🎤" },
-    { key: "event", label: "Event", icon: "📅" },
-    { key: "biodata", label: "Biodata", icon: "👤" },
+  const menuItems: { key: MenuKey; label: string; icon: LucideIcon }[] = [
+    { key: "dashboard", label: "Dashboard", icon: Home },
+    { key: "category", label: "Category", icon: FolderOpen },
+    { key: "pembicara", label: "Pembicara", icon: Mic },
+    { key: "event", label: "Event", icon: Calendar },
+    { key: "biodata", label: "Biodata", icon: User },
   ];
 
   const btnClass = (menu: MenuKey) =>
@@ -42,22 +43,22 @@ export default function DashboardPage() {
         return (
           <div className="space-y-6">
             <div className="bg-gradient-to-br from-[#8b2551] to-[#c2185b] rounded-2xl p-8 text-white">
-              <h1 className="text-3xl font-bold mb-2">Selamat Datang, {user?.name || "User"}! 👋</h1>
-              <p className="text-white/80">NIM: {user?.nim || "-"} — Kelola data event dengan mudah melalui dashboard ini.</p>
+              <h1 className="text-3xl font-bold mb-2">Selamat Datang, {user?.name || "User"}!</h1>
+              <p className="text-white/80">Kelola data event dengan mudah melalui dashboard ini.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <button onClick={() => setActiveMenu("category")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left">
-                <p className="text-3xl mb-2">📂</p>
+              <button onClick={() => setActiveMenu("category")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col items-start">
+                <FolderOpen className="w-8 h-8 text-[#8b2551] mb-3" />
                 <p className="font-bold text-gray-800">Category</p>
                 <p className="text-sm text-gray-500">Kelola kategori event</p>
               </button>
-              <button onClick={() => setActiveMenu("pembicara")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left">
-                <p className="text-3xl mb-2">🎤</p>
+              <button onClick={() => setActiveMenu("pembicara")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col items-start">
+                <Mic className="w-8 h-8 text-[#8b2551] mb-3" />
                 <p className="font-bold text-gray-800">Pembicara</p>
                 <p className="text-sm text-gray-500">Kelola data pembicara</p>
               </button>
-              <button onClick={() => setActiveMenu("event")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left">
-                <p className="text-3xl mb-2">📅</p>
+              <button onClick={() => setActiveMenu("event")} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col items-start">
+                <Calendar className="w-8 h-8 text-[#8b2551] mb-3" />
                 <p className="font-bold text-gray-800">Event</p>
                 <p className="text-sm text-gray-500">Kelola data event</p>
               </button>
@@ -75,16 +76,19 @@ export default function DashboardPage() {
             <img src={navLogo} alt="INVOFEST Logo" className="w-full max-w-[190px] h-auto object-contain" />
           </div>
           <nav className="flex-1 flex flex-col gap-3 py-6">
-            {menuItems.map((item) => (
-              <button key={item.key} onClick={() => setActiveMenu(item.key)} className={btnClass(item.key)}>
-                <span>{item.icon}</span> {item.label}
-              </button>
-            ))}
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button key={item.key} onClick={() => setActiveMenu(item.key)} className={btnClass(item.key)}>
+                  <Icon className="w-5 h-5" /> {item.label}
+                </button>
+              );
+            })}
           </nav>
           <div className="pt-6 border-t border-gray-100 space-y-2">
             <div className="px-4 py-2 text-xs text-gray-400">Login: {user?.nim || "-"}</div>
-            <button onClick={handleLogout} className="w-full text-left rounded-lg px-4 py-3 bg-red-50 text-red-600 font-semibold hover:bg-red-100 transition-colors">
-              🚪 Logout
+            <button onClick={handleLogout} className="w-full text-left rounded-lg px-4 py-3 bg-red-50 text-red-600 font-semibold hover:bg-red-100 transition-colors flex items-center gap-3">
+              <LogOut className="w-5 h-5" /> Logout
             </button>
           </div>
         </aside>

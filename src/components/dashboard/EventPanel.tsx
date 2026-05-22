@@ -3,6 +3,7 @@ import { useEventStore } from "../../stores/eventStore";
 import { useCategoryStore } from "../../stores/categoryStore";
 import { usePembicaraStore } from "../../stores/pembicaraStore";
 import type { Event } from "../../types";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function EventPanel() {
   const { events, isLoading, error, fetchEvents, createEvent, updateEvent, deleteEvent } = useEventStore();
@@ -88,9 +89,15 @@ export default function EventPanel() {
                   <td className="px-4 py-4 text-sm text-gray-500">{ev.pembicara?.name || "-"}</td>
                   <td className="px-4 py-4 text-sm text-gray-500">{ev.location}</td>
                   <td className="px-4 py-4 text-sm text-gray-500">{new Date(ev.dateEvent).toLocaleDateString("id-ID")}</td>
-                  <td className="px-4 py-4 text-right space-x-2">
-                    <button onClick={() => handleEdit(ev)} className="text-blue-600 hover:text-blue-800 text-sm font-medium">Edit</button>
-                    <button onClick={() => { if (confirm("Yakin hapus?")) deleteEvent(ev.id); }} className="text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                  <td className="px-4 py-4 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <button onClick={() => handleEdit(ev)} title="Edit" className="p-1.5 rounded-md text-blue-600 hover:bg-blue-50 hover:text-blue-800 transition-colors">
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => { if (confirm("Yakin hapus?")) deleteEvent(ev.id); }} title="Hapus" className="p-1.5 rounded-md text-red-600 hover:bg-red-50 hover:text-red-800 transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

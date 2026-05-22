@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Button from '../ui/Button';
 import maskotSeminar from '../../assets/Maskot-Seminar.png';
 import { useEventStore } from '../../stores/eventStore';
+import { MapPin, CalendarDays } from 'lucide-react';
 
 export default function SeminarSection() {
   const { events, fetchEvents, isLoading } = useEventStore();
@@ -38,9 +39,13 @@ export default function SeminarSection() {
                     "{seminarEvent.name.replace('IT Seminar - ', '')}"
                   </strong>
                   {seminarEvent.description}
-                  <div className="mt-4 text-sm text-[#8b2551] font-semibold">
-                    <p>📍 {seminarEvent.location}</p>
-                    <p>📅 {new Date(seminarEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  <div className="mt-4 text-sm text-[#8b2551] font-semibold space-y-2">
+                    <p className="flex items-center gap-2">
+                      <MapPin size={16} /> {seminarEvent.location}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <CalendarDays size={16} /> {new Date(seminarEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    </p>
                   </div>
                 </>
               ) : (

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Button from '../ui/Button';
 import maskotTalkshow from '../../assets/Maskot-Talkshow.png';
 import { useEventStore } from '../../stores/eventStore';
+import { MapPin, CalendarDays } from 'lucide-react';
 
 export default function TalkshowSection() {
   const { events, fetchEvents, isLoading } = useEventStore();
@@ -37,9 +38,13 @@ export default function TalkshowSection() {
                     "{talkshowEvent.name.replace('IT Talkshow - ', '')}"
                   </strong>
                   {talkshowEvent.description}
-                  <div className="mt-4 text-sm text-[#8b2551] font-semibold">
-                    <p>📍 {talkshowEvent.location}</p>
-                    <p>📅 {new Date(talkshowEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  <div className="mt-4 text-sm text-[#8b2551] font-semibold space-y-2">
+                    <p className="flex items-center gap-2">
+                      <MapPin size={16} /> {talkshowEvent.location}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <CalendarDays size={16} /> {new Date(talkshowEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    </p>
                   </div>
                 </>
               ) : (

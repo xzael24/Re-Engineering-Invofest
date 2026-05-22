@@ -8,3 +8,9 @@
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
+
+/* Sembunyikan tombol show password bawaan browser Edge */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}

@@ -35,6 +35,11 @@ export const authApi = {
       method: "POST",
       body: JSON.stringify({ nim, password }),
     }),
+  register: (data: any) =>
+    request<LoginResponse>("/users/register", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
 };
 
 // ==================== Category API ====================

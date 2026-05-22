@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Button from '../ui/Button';
 import maskotLomba from '../../assets/Maskot-Lomba.png';
 import { useEventStore } from '../../stores/eventStore';
+import { MapPin, CalendarDays } from 'lucide-react';
 
 export default function CompetitionSection() {
   const { events, fetchEvents, isLoading } = useEventStore();
@@ -70,9 +71,13 @@ export default function CompetitionSection() {
                       "{competitionEvent.name.replace('IT Competition - ', '')}"
                     </strong>
                     {competitionEvent.description}
-                    <div className="mt-4 text-sm text-[#8b2551] font-semibold">
-                      <p>📍 {competitionEvent.location}</p>
-                      <p>📅 {new Date(competitionEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    <div className="mt-4 text-sm text-[#8b2551] font-semibold space-y-2">
+                      <p className="flex items-center gap-2">
+                        <MapPin size={16} /> {competitionEvent.location}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <CalendarDays size={16} /> {new Date(competitionEvent.dateEvent).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                      </p>
                     </div>
                   </>
                 ) : (

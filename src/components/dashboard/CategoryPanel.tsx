@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCategoryStore } from "../../stores/categoryStore";
 import type { Category } from "../../types";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function CategoryPanel() {
   const { categories, isLoading, error, fetchCategories, createCategory, updateCategory, deleteCategory } = useCategoryStore();
@@ -80,9 +81,15 @@ export default function CategoryPanel() {
                   <td className="px-6 py-4 text-sm text-gray-600">{i + 1}</td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-800">{cat.name}</td>
                   <td className="px-6 py-4 text-sm text-gray-500">{new Date(cat.createdAt).toLocaleDateString("id-ID")}</td>
-                  <td className="px-6 py-4 text-right space-x-2">
-                    <button onClick={() => handleEdit(cat)} className="text-blue-600 hover:text-blue-800 text-sm font-medium">Edit</button>
-                    <button onClick={() => handleDelete(cat.id)} className="text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                  <td className="px-6 py-4 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <button onClick={() => handleEdit(cat)} title="Edit" className="p-1.5 rounded-md text-blue-600 hover:bg-blue-50 hover:text-blue-800 transition-colors">
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => handleDelete(cat.id)} title="Hapus" className="p-1.5 rounded-md text-red-600 hover:bg-red-50 hover:text-red-800 transition-colors">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

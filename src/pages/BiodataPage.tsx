@@ -2,6 +2,7 @@
 // Menu khusus menampilkan biodata mahasiswa pembuat website
 
 import { useAuthStore } from "../stores/authStore";
+import { User, FileText, GraduationCap } from "lucide-react";
 
 export default function BiodataPage() {
   const { user } = useAuthStore();
@@ -24,7 +25,7 @@ export default function BiodataPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-[#6e2242] mb-4 flex items-center gap-2">
-            <span className="text-xl"></span> Informasi Pribadi
+            <User className="w-5 h-5 text-[#8b2551]" /> Informasi Pribadi
           </h3>
           <div className="space-y-3">
             <div>
@@ -52,7 +53,7 @@ export default function BiodataPage() {
 
         <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-[#6e2242] mb-4 flex items-center gap-2">
-            <span className="text-xl">📝</span> Bio & Event
+            <FileText className="w-5 h-5 text-[#8b2551]" /> Bio & Event
           </h3>
           <div className="space-y-3">
             <div>
@@ -77,7 +78,7 @@ export default function BiodataPage() {
 
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-[#6e2242] mb-4 flex items-center gap-2">
-          <span className="text-xl">🎓</span> Informasi Akademik
+          <GraduationCap className="w-5 h-5 text-[#8b2551]" /> Informasi Akademik
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-[#fdf5f9] rounded-lg p-4 text-center">

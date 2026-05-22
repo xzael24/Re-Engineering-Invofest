@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Input } from '../ui/Input';
 import { PasswordInput } from '../ui/PasswordInput';
 import { Textarea } from '../ui/Textarea';
 import { Select } from '../ui/Select';
 import { Button } from '../ui/SubmitButton';
+import { useAuthStore } from '../../stores/authStore';
 
 type RegisterFormValues = {
   name: string;
@@ -11,6 +13,7 @@ type RegisterFormValues = {
   password: string;
   bio: string;
   event: string;
+  nim: string; // backend requires NIM
 };
 
 export default function RegisterForm() {
@@ -18,18 +21,43 @@ export default function RegisterForm() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<RegisterFormValues>();
 
-  const onSubmit = (data: RegisterFormValues) => {
-    console.log(data);
-    reset();
+  const navigate = useNavigate();
+  const { register: registerUser, isLoading, error, clearError } = useAuthStore();
+
+  const onSubmit = async (data: RegisterFormValues) => {
+    clearError();
+    const success = await registerUser(data);
+    if (success) {
+      navigate('/login');
+    }
   };
 
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border border-gray-100">
       <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Registrasi</h2>
+      
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
+          {error}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <Input
+          label="NIM"
+          name="nim"
+          register={register}
+          rules={{
+            required: "NIM wajib diisi",
+            pattern: {
+              value: /^\d{8,}$/,
+              message: "NIM harus berupa angka minimal 8 digit",
+            },
+          }}
+          error={errors.nim?.message as string}
+        />
         <Input
           label="Nama"
           name="name"
@@ -75,16 +103,9 @@ export default function RegisterForm() {
           error={errors.password?.message as string}
         />
         <Textarea
-          label="Bio"
+          label="Bio (Opsional)"
           name="bio"
           register={register}
-          rules={{
-            required: "Bio wajib diisi",
-            minLength: {
-              value: 20,
-              message: "Bio minimal 20 karakter",
-            },
-          }}
           error={errors.bio?.message as string}
         />
         <Select
@@ -93,13 +114,15 @@ export default function RegisterForm() {
           register={register}
           rules={{ required: "Silakan pilih event" }}
           options={[
-            { label: "Invofest", value: "invofest" },
-            { label: "Workshop AI", value: "ai" },
+            { label: "IT Seminar", value: "IT Seminar" },
+            { label: "IT Workshop", value: "IT Workshop" },
+            { label: "IT Talkshow", value: "IT Talkshow" },
+            { label: "IT Competition", value: "IT Competition" },
           ]}
           error={errors.event?.message as string}
         />
         <div className="mt-2 text-center">
-          <Button type="submit" label="Daftar" />
+          <Button type="submit" label={isLoading ? "Memproses..." : "Daftar"} />
         </div>
       </form>
     </div>

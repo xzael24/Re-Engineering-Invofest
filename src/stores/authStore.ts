@@ -16,6 +16,7 @@ interface AuthState {
 
   // Actions
   login: (nim: string, password: string) => Promise<boolean>;
+  register: (data: any) => Promise<boolean>;
   logout: () => void;
   clearError: () => void;
 }
@@ -47,6 +48,22 @@ export const useAuthStore = create<AuthState>()(
           set({
             isLoading: false,
             error: error.message || "Login gagal",
+          });
+          return false;
+        }
+      },
+
+      register: async (data: any) => {
+        set({ isLoading: true, error: null });
+        try {
+          await authApi.register(data);
+          // Setelah berhasil register, auto login atau cukup return true
+          set({ isLoading: false, error: null });
+          return true;
+        } catch (error: any) {
+          set({
+            isLoading: false,
+            error: error.message || "Registrasi gagal",
           });
           return false;
         }
