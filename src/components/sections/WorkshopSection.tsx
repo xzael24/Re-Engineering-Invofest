@@ -16,7 +16,7 @@ export default function WorkshopSection() {
   );
 
   return (
-    <section className="w-full bg-[#f8f9fa] py-16 lg:py-24 px-6 lg:px-12 relative z-10 border-t border-b border-gray-100">
+    <section className="w-full bg-white py-16 lg:py-24 px-6 lg:px-12 relative z-10 border-t border-b border-gray-100">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
         
         <div className="flex-1 flex justify-center items-center relative lg:order-1 order-2">
