@@ -13,7 +13,7 @@ interface AuthState {
 
   login: (nim: string, password: string) => Promise<boolean>;
   register: (data: any) => Promise<boolean>;
-  updatePhoto: (file: File) => Promise<boolean>;
+  updatePhoto: (photoBase64: string) => Promise<boolean>;
   logout: () => void;
   clearError: () => void;
 }
@@ -66,10 +66,10 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      updatePhoto: async (file: File) => {
+      updatePhoto: async (photoBase64: string) => {
         set({ isLoading: true, error: null });
         try {
-          const response = await authApi.updatePhoto(file);
+          const response = await authApi.updatePhoto(photoBase64);
           set({
             user: response.user,
             isLoading: false,

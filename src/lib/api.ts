@@ -38,12 +38,10 @@ export const authApi = {
       method: "POST",
       body: JSON.stringify(data),
     }),
-  updatePhoto: (file: File) => {
-    const formData = new FormData();
-    formData.append("photo", file);
+  updatePhoto: (photoBase64: string) => {
     return request<{ message: string; user: User }>("/users/profile/photo", {
       method: "PUT",
-      body: formData,
+      body: JSON.stringify({ photo: photoBase64 }),
     });
   },
 };

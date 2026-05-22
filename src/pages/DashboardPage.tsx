@@ -62,7 +62,7 @@ export default function DashboardPage() {
             <div className="flex items-center gap-3 px-3 py-2 bg-[#fdf5f9] rounded-xl border border-[#8b2551]/10">
               <div className="w-10 h-10 rounded-full bg-[#8b2551] text-white flex items-center justify-center font-bold text-sm overflow-hidden shrink-0 shadow-inner">
                 {user?.photo ? (
-                  <img src={`${BACKEND_URL}${user.photo}`} alt={user.name} className="w-full h-full object-cover" />
+                  <img src={user.photo.startsWith("data:") ? user.photo : `${BACKEND_URL}${user.photo}`} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   user?.name?.charAt(0).toUpperCase() || "M"
                 )}

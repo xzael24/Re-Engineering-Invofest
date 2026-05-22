@@ -23,28 +23,42 @@ export default function BiodataPage() {
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      setUploadMessage({ type: 'error', text: 'Ukuran file maksimal 5MB' });
+    if (file.size > 2 * 1024 * 1024) {
+      setUploadMessage({ type: 'error', text: 'Ukuran file maksimal 2MB' });
       setTimeout(() => setUploadMessage(null), 4000);
       return;
     }
 
     setIsUploading(true);
     setUploadMessage(null);
-    try {
-      const success = await updatePhoto(file);
-      if (success) {
-        setUploadMessage({ type: 'success', text: 'Foto profil berhasil diperbarui!' });
-      } else {
-        setUploadMessage({ type: 'error', text: 'Gagal mengupload foto profil' });
+
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64String = reader.result as string;
+      try {
+        const success = await updatePhoto(base64String);
+        if (success) {
+          setUploadMessage({ type: 'success', text: 'Foto profil berhasil diperbarui!' });
+        } else {
+          setUploadMessage({ type: 'error', text: 'Gagal mengupload foto profil' });
+        }
+      } catch (err: any) {
+        setUploadMessage({ type: 'error', text: err.message || 'Terjadi kesalahan saat upload' });
+      } finally {
+        setIsUploading(false);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        setTimeout(() => setUploadMessage(null), 4000);
       }
-    } catch (err: any) {
-      setUploadMessage({ type: 'error', text: err.message || 'Terjadi kesalahan saat upload' });
-    } finally {
+    };
+
+    reader.onerror = () => {
+      setUploadMessage({ type: 'error', text: 'Gagal membaca file gambar' });
       setIsUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
       setTimeout(() => setUploadMessage(null), 4000);
-    }
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -68,7 +82,7 @@ export default function BiodataPage() {
           >
             {user?.photo ? (
               <img 
-                src={`${BACKEND_URL}${user.photo}`} 
+                src={user.photo.startsWith("data:") ? user.photo : `${BACKEND_URL}${user.photo}`} 
                 alt={user.name} 
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
