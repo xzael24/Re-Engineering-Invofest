@@ -1,5 +1,12 @@
 import type { Category, Pembicara, Event, LoginResponse, ApiResponse, User } from "../types";
 
+interface RegisterData {
+  nim: string;
+  password: string;
+  name: string;
+  email: string;
+}
+
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 export const BACKEND_URL = API_BASE.replace("/api", "");
 
@@ -33,7 +40,7 @@ export const authApi = {
       method: "POST",
       body: JSON.stringify({ nim, password }),
     }),
-  register: (data: any) =>
+  register: (data: RegisterData) =>
     request<LoginResponse>("/users/register", {
       method: "POST",
       body: JSON.stringify(data),
@@ -82,6 +89,18 @@ export const pembicaraApi = {
     request<{ message: string }>(`/pembicaras/${id}`, { method: "DELETE" }),
 };
 
+
+export const userApi = {
+  getAll: () => request<User[]>("/users"),
+  getById: (id: number) => request<User>(`/users/${id}`),
+  update: (id: number, data: { name?: string; bio?: string; event?: string; password?: string }) =>
+    request<{ message: string; user: User }>(`/users/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+  delete: (id: number) =>
+    request<{ message: string }>(`/users/${id}`, { method: "DELETE" }),
+};
 
 export const eventApi = {
   getAll: () => request<Event[]>("/events"),

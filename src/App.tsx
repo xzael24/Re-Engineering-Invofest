@@ -11,6 +11,7 @@ import DashboardOverview from './components/dashboard/DashboardOverview.tsx';
 import CategoryPanel from './components/dashboard/CategoryPanel.tsx';
 import PembicaraPanel from './components/dashboard/PembicaraPanel.tsx';
 import EventPanel from './components/dashboard/EventPanel.tsx';
+import UserPanel from './components/dashboard/UserPanel.tsx';
 import BiodataPage from './pages/BiodataPage.tsx';
 import { useAuthStore } from './stores/authStore.ts';
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="category" element={<CategoryPanel />} />
         <Route path="pembicara" element={<PembicaraPanel />} />
         <Route path="event" element={<EventPanel />} />
+        <Route path="users" element={<UserPanel />} />
         <Route path="biodata" element={<BiodataPage />} />
       </Route>
 

@@ -1,10 +1,10 @@
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useAuthStore } from "../stores/authStore";
 import navLogo from "../assets/nav-logo.png";
-import { Home, FolderOpen, Mic, Calendar, User, LogOut, type LucideIcon } from "lucide-react";
+import { Home, FolderOpen, Mic, Calendar, User, Users, LogOut, type LucideIcon } from "lucide-react";
 import { BACKEND_URL } from "../lib/api";
 
-type MenuKey = "dashboard" | "category" | "pembicara" | "event" | "biodata";
+type MenuKey = "dashboard" | "category" | "pembicara" | "event" | "users" | "biodata";
 
 export default function DashboardPage() {
   const { user, logout } = useAuthStore();
@@ -25,6 +25,7 @@ export default function DashboardPage() {
     { key: "category", label: "Category", icon: FolderOpen },
     { key: "pembicara", label: "Pembicara", icon: Mic },
     { key: "event", label: "Event", icon: Calendar },
+    { key: "users", label: "Users", icon: Users },
     { key: "biodata", label: "Biodata", icon: User },
   ];
 

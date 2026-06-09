@@ -3,6 +3,13 @@ import { persist } from "zustand/middleware";
 import type { User } from "../types";
 import { authApi } from "../lib/api";
 
+interface RegisterData {
+  nim: string;
+  password: string;
+  email: string;
+  name: string;
+}
+
 interface AuthState {
   user: User | null;
   token: string | null;
@@ -12,7 +19,7 @@ interface AuthState {
 
 
   login: (nim: string, password: string) => Promise<boolean>;
-  register: (data: any) => Promise<boolean>;
+  register: (data: RegisterData) => Promise<boolean>;
   updatePhoto: (photoBase64: string) => Promise<boolean>;
   logout: () => void;
   clearError: () => void;
@@ -41,26 +48,28 @@ export const useAuthStore = create<AuthState>()(
             error: null,
           });
           return true;
-        } catch (error: any) {
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : "Login gagal";
           set({
             isLoading: false,
-            error: error.message || "Login gagal",
+            error: errorMessage,
           });
           return false;
         }
       },
 
-      register: async (data: any) => {
+      register: async (data: RegisterData) => {
         set({ isLoading: true, error: null });
         try {
           await authApi.register(data);
 
           set({ isLoading: false, error: null });
           return true;
-        } catch (error: any) {
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : "Registrasi gagal";
           set({
             isLoading: false,
-            error: error.message || "Registrasi gagal",
+            error: errorMessage,
           });
           return false;
         }
@@ -76,10 +85,11 @@ export const useAuthStore = create<AuthState>()(
             error: null,
           });
           return true;
-        } catch (error: any) {
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : "Gagal mengunggah foto profil";
           set({
             isLoading: false,
-            error: error.message || "Gagal mengunggah foto profil",
+            error: errorMessage,
           });
           return false;
         }
